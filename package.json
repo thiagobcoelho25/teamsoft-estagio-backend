@@ -1,0 +1,33 @@
+{
+  "name": "teamsoft-estagio-backend",
+  "version": "1.0.0",
+  "description": "Somos apaixonados por desenvolver soluções que fazem a diferença na vida das pessoas. \r Conhecimento técnico é muito importante, mas acima de tudo, buscamos pessoas que queiram crescer e se desenvolver junto conosco. \r E aí, topa o desafio? Então vem para o DreamTeam, vem para a TeamSoft!",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon .",
+    "init-db": "node src/db/init.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teamsoftbr/join-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Teamsoftbr/join-backend/issues"
+  },
+  "homepage": "https://github.com/Teamsoftbr/join-backend#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "sqlite": "^4.0.21",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
