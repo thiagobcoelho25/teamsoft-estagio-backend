@@ -1,7 +1,48 @@
-const Database = require('../db/config');
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Cliente } from "./Cliente";
+
+@Entity("table_endereco")
+class Endereco {
+    
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    endereco: string
+
+    @Column()
+    numero: number
+
+    @Column({nullable: true})
+    complemento: string
+
+    @Column()
+    bairro: string
+
+    @Column()
+    cidade: string
+
+    @Column()
+    estado: string
+
+    @Column()
+    cep: string
+
+    @Column('decimal', { precision: 9, scale: 2 })
+    latitude: number
+
+    @Column('decimal', { precision: 9, scale: 2 })
+    longitude: number
+
+    @ManyToOne(() => Cliente, cliente => cliente.enderecos, { onDelete: 'CASCADE' })
+    @JoinColumn({name: "id_fk_cliente"})
+    cliente: Cliente
+}
+
+export { Endereco }
 
 
-module.exports = {
+/*module.exports = {
     async getEnderecosByIdCliente(id_cliente){
         const db = await Database()
 
@@ -57,4 +98,4 @@ module.exports = {
 
         await db.close()
     }
-}
+}*/

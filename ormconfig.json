@@ -1,0 +1,16 @@
+{
+    "type": "sqlite",
+    "host": "localhost",
+    "port": 3000,
+    "database": "./src/db/database.sqlite",
+    "migrations": [
+        "./src/db/migrations/**.ts"
+    ],
+    "entities": [
+        "./src/model/**.ts"
+    ],
+    "logging": true,
+    "cli": {
+        "migrationsDir": "./src/db/migrations"
+    }
+}
