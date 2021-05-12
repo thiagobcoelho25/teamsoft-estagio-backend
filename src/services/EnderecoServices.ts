@@ -49,6 +49,16 @@ class EnderecosService {
 
     async putEndereco(endereco: Endereco){
         const { id } = endereco
+    
+        let retorno = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${endereco.numero},${endereco.endereco},${endereco.bairro},${endereco.cidade},${endereco.estado},${endereco.cep}&key=${process.env.YOUR_API_KEY}`)
+
+        if(retorno.data.status !== 'OK'){
+            throw new Error("Error na API Google");
+        } else {
+            endereco.latitude = retorno.data.results[0].geometry.location.lat
+            endereco.longitude = retorno.data.results[0].geometry.location.lng
+        }
+
         await this.enderecoRepository.createQueryBuilder().update(Endereco).set({...endereco}).where("id = :id",{id})
         .execute()
     }

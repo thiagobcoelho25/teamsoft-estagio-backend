@@ -18,6 +18,7 @@ class ClientesService {
         let newCliente = this.clienteRepository.create(cliente)
         
         const clienteExist = await this.clienteRepository.findOne({cnpj: newCliente.cnpj})
+        
         if(clienteExist){
             throw new Error("Error de usuario existente")
         }

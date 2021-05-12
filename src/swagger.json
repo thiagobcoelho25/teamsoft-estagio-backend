@@ -1,0 +1,314 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "API Thiago Ribeiro",
+        "description": "A description of your project",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "API Estagio teamSoft",
+            "description": "API de Clientes e Enderecos"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/clientes": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Pegar Todos os clientes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Clientes"
+                        }
+                    }
+                }
+            }
+        },
+        "/cliente": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Cria um novo Cliente com Obrigatoriamente 1, e apenas 1, Endereco no array de enderecos",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Cliente Object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Cliente"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "put":{
+                "summary": "Alterar Cliente",
+                "tags": [
+                    "Cliente"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Cliente For Put Object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClienteForPut"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    },
+                    "404": {
+                        "description": "Failed."
+                    }
+                }
+            }
+        },
+        "/cliente/{cnpj}": {
+            "delete": {
+                "summary": "Deletar Cliente por CNPJ",
+                "tags": [
+                    "Cliente"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "cnpj",
+                        "required": true,
+                        "description": "Deletar Cliente por CNPJ",
+                        "schema": {
+                            "$ref": "#/definitions/CNPJ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed."
+                    }
+                }
+            }
+        },
+        "/endereco": {
+            "post": {
+                "tags": [
+                    "Endereco"
+                ],
+                "summary": "Cria um ou mais Enderecos para um Cliente em Especifico",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Endereco For Post Object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EnderecosForPost"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Altera um Endereco por seu Id na requisição do Corpo",
+                "tags": [
+                    "Endereco"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Endereco For Put Object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Endereco"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Failed."
+                    }
+                }
+            }
+        },
+        "/endereco/{id}": {
+            "delete": {
+                "summary": "Deletar Endereco por id",
+                "tags": [
+                    "Endereco"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Deletar Endereco por id",
+                        "schema": {
+                            "$ref": "#/definitions/Endereco"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Clientes": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Cliente"
+            }
+        },
+        "EnderecosForPost": {
+            "type": "object",
+            "properties": {
+                "cnpj": {
+                    "type": "string"
+                },
+                "enderecos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Endereco"
+                    }
+                }
+            }
+        },
+        "Cliente": {
+            "type": "object",
+            "properties": {
+                "cnpj": {
+                    "type": "string"
+                },
+                "razao-social": {
+                    "type": "string"
+                },
+                "contato": {
+                    "type": "string"
+                },
+                "telefone": {
+                    "type": "string"
+                },
+                "enderecos": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Endereco"
+                    }
+                }
+            }
+        },
+        "Endereco": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "endereco": {
+                    "type": "string"
+                },
+                "numero": {
+                    "type": "number"
+                },
+                "complemento": {
+                    "type": "string"
+                },
+                "bairro": {
+                    "type": "string"
+                },
+                "cidade": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "string"
+                },
+                "cep": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "decimal"
+                },
+                "longitude": {
+                    "type": "decimal"
+                }
+            }
+        },
+        "ClienteForPut": {
+            "type": "object",
+            "properties": {
+                "cnpj": {
+                    "type": "string"
+                },
+                "razao-social": {
+                    "type": "string"
+                },
+                "contato": {
+                    "type": "string"
+                },
+                "telefone": {
+                    "type": "string"
+                }
+            }
+        },
+        "CNPJ": {
+            "type": "string"
+        }
+    }
+}
